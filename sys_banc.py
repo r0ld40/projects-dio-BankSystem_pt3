@@ -30,7 +30,21 @@ class Cliente:
         if cpfN in (conta['CPF'] for conta in self.CONTAS_E_USUARIOS.values()) or senhaN in (conta['Senha'] for conta in self.CONTAS_E_USUARIOS.values()) or numeroC in (conta['Numero da conta'] for conta in self.CONTAS_E_USUARIOS.values()):
             print('\n    [ERRO] Usuário ou dados já cadastrados.')  
         else:
-            self.CONTAS_E_USUARIOS[userN] = {'CPF': cpfN, 'Data de Nascimento': dataN, 'Senha': senhaN, 'Dados': {'Agencia': '0001', 'Numero da conta': numeroC, 'Saldo': 0, 'Extrato': [], 'Numero de saques': 0}, 'Endereco': {'Cidade': cidade, 'Bairro': bairro, 'Numero': numero, 'Rua': rua, 'CEP': cep}}
+            self.CONTAS_E_USUARIOS[userN] = {'CPF': cpfN, 
+                                             'Data de Nascimento': dataN, 
+                                             'Senha': senhaN, 
+                                             'Dados': {
+                                                        'Agencia': '0001', 
+                                                        'Numero da conta': numeroC, 
+                                                        'Saldo': 0, 
+                                                        'Extrato': [], 
+                                                        'Numero de saques': 0}, 
+                                                            'Endereco': {   
+                                                                'Cidade': cidade, 
+                                                                'Bairro': bairro, 
+                                                                'Numero': numero, 
+                                                                'Rua': rua, 
+                                                                'CEP': cep}}
 
     def deposito(self, user):
 
@@ -41,7 +55,7 @@ class Cliente:
 
         print("\n    ######## VOLTANDO AO INICIO ########\n")
 
-    def saque(self, user):
+    def saque(self, user):  
 
         x = float(input("    Digite um valor para saque: R$ "))
 

@@ -113,9 +113,10 @@ class Cliente:
 
                 user = str(input('    Digite seu nome: '))
                 cpf = int(input('    Digite seu CPF: '))
+                numeroC = input('    Digite o numero da conta: ')
                 senha = int(input('    Digite sua senha: '))
 
-                if user in self.CONTAS_E_USUARIOS and self.CONTAS_E_USUARIOS[user]['CPF'] == cpf and self.CONTAS_E_USUARIOS[user]['Senha'] == senha:
+                if user in self.CONTAS_E_USUARIOS and self.CONTAS_E_USUARIOS[user]['CPF'] == cpf and self.CONTAS_E_USUARIOS[user]['Senha'] == senha and self.CONTAS_E_USUARIOS[user]['Dados']['Numero da conta'] == numeroC:
                     boolW = False
                     Cliente.perguntaMenu(self, user)
                 else:

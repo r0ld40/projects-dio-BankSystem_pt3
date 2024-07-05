@@ -75,36 +75,51 @@ class Cliente:
     >>> """).lower()
         print()
         
-        if menu == "a":
-            Cliente.deposito(self, user)
-        elif menu == "b":
-            Cliente.saque(self, user)
-        elif menu == "c":
-            Cliente.mostraExtrato(self, user)
-        elif menu == "d":
-            Cliente.criarConta(self)
-        elif menu == "e":
-            Cliente.listaUsers(self)
-        elif menu == 'f':
-            print('\n    ##### FINALIZANDO O PROGRAMA #####')
-        else:
-            print("    ##### [ERRO] OPERACAO INVALIDA #####")
+        boolW = True
+        while boolW == True:
+            if menu == "a":
+                boolW = False
+                Cliente.deposito(self, user)
+            elif menu == "b":
+                boolW = False
+                Cliente.saque(self, user)
+            elif menu == "c":
+                boolW = False
+                Cliente.mostraExtrato(self, user)
+            elif menu == "d":
+                boolW = False
+                Cliente.criarConta(self)
+            elif menu == "e":
+                boolW = False
+                Cliente.listaUsers(self)
+            elif menu == 'f':
+                boolW = False
+                print('\n    ##### FINALIZANDO O PROGRAMA #####')
+            else:
+                print("    ##### [ERRO] OPERACAO INVALIDA #####")
 
     def perguntaUsuario(self):
         
-        x = str(input('\n    Ja tem conta? [S/N] --> '))
+        boolW = True
+        while boolW == True:
 
-        if x == 'S' or x == 's': 
+            x = str(input('\n    Ja tem conta? [S/N] --> ')).lower()
 
-            print("\n    ######## INICIO ########\n")
+            if x == 's': 
 
-            user = str(input('    Digite seu nome: '))
-            cpf = int(input('    Digite seu CPF: '))
-            senha = int(input('    Digite sua senha: '))
+                print("\n    ######## INICIO ########\n")
 
-            if user in self.CONTAS_E_USUARIOS and self.CONTAS_E_USUARIOS[user]['CPF'] == cpf and self.CONTAS_E_USUARIOS[user]['senha'] == senha:
-                Cliente.perguntaMenu(self, user)
+                user = str(input('    Digite seu nome: '))
+                cpf = int(input('    Digite seu CPF: '))
+                senha = int(input('    Digite sua senha: '))
+
+                if user in self.CONTAS_E_USUARIOS and self.CONTAS_E_USUARIOS[user]['CPF'] == cpf and self.CONTAS_E_USUARIOS[user]['senha'] == senha:
+                    boolW = False
+                    Cliente.perguntaMenu(self, user)
+                else:
+                    print('\n    [ERRO] Dados nao encontrados.\n')
+            elif x == 'n':
+                boolW = False
+                Cliente.criarConta(self)
             else:
-                print('\n    [ERRO] Dados nao encontrados.\n')
-        else:
-            Cliente.criarConta(self)
+                print("    ##### [ERRO] OPERACAO INVALIDA #####")

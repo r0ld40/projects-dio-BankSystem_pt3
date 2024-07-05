@@ -15,7 +15,9 @@ class Cliente:
 
         userN = input('    Digite seu nome: ')
         cpfN = int(input('    Digite seu CPF: '))
+        dataN = input('    Data de nascimento: ')
         senhaN = int(input('    Crie sua senha: '))
+        numeroC = input('    Numero da conta: ')
 
         print('    Digite abaixo seu endereco completo:\n')
 
@@ -25,17 +27,17 @@ class Cliente:
         numero = int(input('    >>> Numero: '))
         cep = int(input('    >>> CEP: '))
 
-        if cpfN in (conta['CPF'] for conta in self.CONTAS_E_USUARIOS.values()) or senhaN in (conta['senha'] for conta in self.CONTAS_E_USUARIOS.values()):
+        if cpfN in (conta['CPF'] for conta in self.CONTAS_E_USUARIOS.values()) or senhaN in (conta['Senha'] for conta in self.CONTAS_E_USUARIOS.values()) or numeroC in (conta['Numero da conta'] for conta in self.CONTAS_E_USUARIOS.values()):
             print('\n    [ERRO] Usuário ou dados já cadastrados.')  
         else:
-            self.CONTAS_E_USUARIOS[userN] = {'CPF': cpfN, 'senha': senhaN, 'dados': {'saldo': 0, 'extrato': [], 'num_saques': 0}, 'endereco': {'cidade': cidade, 'bairro': bairro, 'numero': numero, 'rua': rua, 'CEP': cep}}
+            self.CONTAS_E_USUARIOS[userN] = {'CPF': cpfN, 'Data de Nascimento': dataN, 'Senha': senhaN, 'Dados': {'Agencia': '0001', 'Numero da conta': numeroC, 'Saldo': 0, 'Extrato': [], 'Numero de saques': 0}, 'Endereco': {'Cidade': cidade, 'Bairro': bairro, 'Numero': numero, 'Rua': rua, 'CEP': cep}}
 
     def deposito(self, user):
 
         x = float(input("    Digite um valor para deposito: R$ "))
 
-        self.CONTAS_E_USUARIOS[user]['dados']['saldo'] += x
-        self.CONTAS_E_USUARIOS[user]['dados']['extrato'].append(x)
+        self.CONTAS_E_USUARIOS[user]['Dados']['Saldo'] += x
+        self.CONTAS_E_USUARIOS[user]['Dados']['Extrato'].append(x)
 
         print("\n    ######## VOLTANDO AO INICIO ########\n")
 
@@ -43,21 +45,21 @@ class Cliente:
 
         x = float(input("    Digite um valor para saque: R$ "))
 
-        if x > self.CONTAS_E_USUARIOS[user]['dados']['saldo'] or self.CONTAS_E_USUARIOS[user]['dados']['num_saques'] >= self.LIMITE_SAQUES or x >= self.LIMITE:
+        if x > self.CONTAS_E_USUARIOS[user]['Dados']['Saldo'] or self.CONTAS_E_USUARIOS[user]['Dados']['Numero de saques'] >= self.LIMITE_SAQUES or x >= self.LIMITE:
             print("    [ERRO] LIMITE DE SAQUES EXCEDIDO OU VALOR MAIOR QUE O ESPERADO.")
         else:
-            self.CONTAS_E_USUARIOS[user]['dados']['saldo'] -= x
-            self.CONTAS_E_USUARIOS[user]['dados']['num_saques'] += 1
-            self.CONTAS_E_USUARIOS[user]['dados']['extrato'].append(-x)
+            self.CONTAS_E_USUARIOS[user]['Dados']['Saldo'] -= x
+            self.CONTAS_E_USUARIOS[user]['Dados']['Numero de saques'] += 1
+            self.CONTAS_E_USUARIOS[user]['Dados']['Extrato'].append(-x)
 
         print("\n    ######## VOLTANDO AO INICIO ########\n")
 
     def mostraExtrato(self, user):
 
         print(f"""\n    ######## SUA CONTA ########\n
-    SALDO: {self.CONTAS_E_USUARIOS[user]['dados']['saldo']}
-    EXTRATO: {self.CONTAS_E_USUARIOS[user]['dados']['extrato']}
-    SAQUES: {self.CONTAS_E_USUARIOS[user]['dados']['num_saques']}
+    SALDO: {self.CONTAS_E_USUARIOS[user]['Dados']['Saldo']}
+    EXTRATO: {self.CONTAS_E_USUARIOS[user]['Dados']['Extrato']}
+    SAQUES: {self.CONTAS_E_USUARIOS[user]['Dados']['Numero de saques']}
     LIMITE DE SAQUES: {self.LIMITE_SAQUES}""")
 
     def perguntaMenu(self, user):
@@ -113,7 +115,7 @@ class Cliente:
                 cpf = int(input('    Digite seu CPF: '))
                 senha = int(input('    Digite sua senha: '))
 
-                if user in self.CONTAS_E_USUARIOS and self.CONTAS_E_USUARIOS[user]['CPF'] == cpf and self.CONTAS_E_USUARIOS[user]['senha'] == senha:
+                if user in self.CONTAS_E_USUARIOS and self.CONTAS_E_USUARIOS[user]['CPF'] == cpf and self.CONTAS_E_USUARIOS[user]['Senha'] == senha:
                     boolW = False
                     Cliente.perguntaMenu(self, user)
                 else:
